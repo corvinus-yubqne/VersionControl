@@ -40,23 +40,17 @@ namespace UserMaintenance
         private void button2_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.InitialDirectory = @"E:\BCE\2021-22-01\IRF\3rd_week\VersionControl\UserMaintenance\UserMaintenance\bin\Debug";
-            sfd.Filter = "Comm Separated Values (*.csv)|*.csv";
-            sfd.DefaultExt = "csv";
-            sfd.AddExtension = true;
+            sfd.Filter = "Text Files | *.txt";
+            sfd.ShowDialog();
 
-            if (sfd.ShowDialog() != DialogResult.OK) return;
+            StreamWriter sw = new StreamWriter(sfd.FileName);
 
-            using (StreamWriter sw = new StreamWriter(sfd.FileName, false, Encoding.UTF8))
+            foreach (var item in users)
             {
-                foreach (var u in users)
-                {
-                    sw.Write(u.ID);
-                    sw.Write(";");
-                    sw.Write(u.FullName);
-                    sw.WriteLine();
-                }
+                sw.WriteLine(item.FullName + " - " + item.ID);
             }
+
+            sw.Close();
         }
     }
 }
