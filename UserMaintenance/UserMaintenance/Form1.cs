@@ -21,6 +21,7 @@ namespace UserMaintenance
             label1.Text = Resource1.FullName;
             button1.Text = Resource1.Add;
             button2.Text = Resource1.Write;
+            button3.Text = Resource1.Delete;
 
             listBox1.DataSource = users;
             listBox1.ValueMember = "ID";
@@ -31,32 +32,34 @@ namespace UserMaintenance
         {
             var u = new User()
             {
-                FullName = textBox1.Text,
+                FullName = textBox1.Text
             };
-
             users.Add(u);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.InitialDirectory = @"E:\BCE\2021-22-01\IRF\3rd_week\VersionControl\UserMaintenance\UserMaintenance\bin\Debug";
-            sfd.Filter = "Comm Separated Values (*.csv)|*.csv";
-            sfd.DefaultExt = "csv";
-            sfd.AddExtension = true;
+            sfd.Filter = "Text Files | *.txt";
+            sfd.ShowDialog();
 
-            if (sfd.ShowDialog() != DialogResult.OK) return;
+            StreamWriter sw = new StreamWriter(sfd.FileName);
 
-            using (StreamWriter sw = new StreamWriter(sfd.FileName, false, Encoding.UTF8))
+            foreach (var item in users)
             {
-                foreach (var u in users)
-                {
-                    sw.Write(u.ID);
-                    sw.Write(";");
-                    sw.Write(u.FullName);
-                    sw.WriteLine();
-                }
+                sw.WriteLine(item.FullName + " - " + item.ID);
             }
+
+            sw.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var name = Convert.ToString(listBox1.SelectedValue);
+            var u = from x in users
+                    where x.ID.ToString() == name
+                    select x;
+            users.Remove(u.FirstOrDefault());
         }
     }
 }
