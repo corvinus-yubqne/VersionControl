@@ -93,13 +93,14 @@ namespace excel_export
                 values[counter, 1] = f.Vendor;
                 values[counter, 2] = f.Side;
                 values[counter, 3] = f.District;
-                values[counter, 4] = f.Elevator;
+                if (f.Elevator == true) values[counter, 4] = "Van";
+                else values[counter, 4] = "Nincs";
                 values[counter, 5] = f.NumberOfRooms;
                 values[counter, 6] = f.FloorArea;
                 values[counter, 7] = f.Price;
-                string v1 = GetCell(counter + 2, 6);
-                string v2 = GetCell(counter + 2, 7);
-                string vv = "=" + v2 + "/" + v1;
+                string v1 = GetCell(counter + 2, 7);
+                string v2 = GetCell(counter + 2, 8);
+                string vv = "=" + v2 + "/" + v1 + "*1000000";
                 values[counter, 8] = vv;
                 counter++;
             }
@@ -134,10 +135,5 @@ namespace excel_export
 
             return ExcelCoordinate;
         }
-
-
-
-
-
     }
 }
