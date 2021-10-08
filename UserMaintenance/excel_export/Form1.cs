@@ -25,8 +25,18 @@ namespace excel_export
         {
             InitializeComponent();
             LoadData();
-            CreateTable();
+            dataGridView1.DataSource = Flats;
 
+            CreateTable();
+        }
+
+        private void LoadData()
+        {
+            Flats = context.Flats.ToList();
+        }
+
+        public void CreateExcel()
+        {
             try
             {
                 xlApp = new Excel.Application();
@@ -48,11 +58,10 @@ namespace excel_export
                 xlWB = null;
                 xlApp = null;
             }
-        }
+            finally
+            {
 
-        private void LoadData()
-        {
-            Flats = context.Flats.ToList();
+            }
         }
 
         private void CreateTable()
@@ -72,7 +81,7 @@ namespace excel_export
 
             for (int i = 0; i < headers.Length; i++)
             {
-                xlSheet.Cells[1, i + 1] = headers[i];
+                xlSheet.Cells[1, (i + 1)] = headers[i];
             }
 
             object[,] values = new object[Flats.Count, headers.Length];
@@ -81,14 +90,17 @@ namespace excel_export
             foreach (Flat f in Flats)
             {
                 values[counter, 0] = f.Code;
-                values[counter, 1] = f.District;
-                values[counter, 2] = f.Elevator;
-                values[counter, 3] = f.FlatSK;
-                values[counter, 4] = f.FloorArea;
+                values[counter, 1] = f.Vendor;
+                values[counter, 2] = f.Side;
+                values[counter, 3] = f.District;
+                values[counter, 4] = f.Elevator;
                 values[counter, 5] = f.NumberOfRooms;
-                values[counter, 6] = f.Price;
-                values[counter, 7] = f.Side;
-                values[counter, 8] = "";
+                values[counter, 6] = f.FloorArea;
+                values[counter, 7] = f.Price;
+                string v1 = GetCell(counter + 2, 6);
+                string v2 = GetCell(counter + 2, 7);
+                string vv = "=" + v2 + "/" + v1;
+                values[counter, 8] = vv;
                 counter++;
             }
 
@@ -98,6 +110,15 @@ namespace excel_export
             xlSheet.get_Range(
                 GetCell(2, 9),
                 GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = "=sum()";
+
+            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
+            headerRange.Font.Bold = true;
+            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.EntireColumn.AutoFit();
+            headerRange.RowHeight = 40;
+            headerRange.Interior.Color = Color.LightBlue;
+            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
         }
 
         private string GetCell(int x, int y)
