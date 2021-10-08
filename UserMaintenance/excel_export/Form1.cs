@@ -16,6 +16,11 @@ namespace excel_export
     {
         RealEstateEntities context = new RealEstateEntities();
         List<Flat> Flats;
+
+        Excel.Application xlApp;
+        Excel.Workbook xlWB;
+        Excel.Worksheet xlSheet;
+
         public Form1()
         {
             InitializeComponent();
