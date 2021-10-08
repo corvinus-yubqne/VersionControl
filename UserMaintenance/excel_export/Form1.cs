@@ -27,7 +27,7 @@ namespace excel_export
             LoadData();
             dataGridView1.DataSource = Flats;
 
-            CreateTable();
+            CreateExcel();
         }
 
         private void LoadData()
@@ -107,9 +107,6 @@ namespace excel_export
             xlSheet.get_Range(
                 GetCell(2, 1),
                 GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
-            xlSheet.get_Range(
-                GetCell(2, 9),
-                GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = "=sum()";
 
             Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
             headerRange.Font.Bold = true;
