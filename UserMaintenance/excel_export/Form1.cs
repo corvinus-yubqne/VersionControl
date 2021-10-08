@@ -69,6 +69,11 @@ namespace excel_export
                 "Ár (mFt)",
                 "Négyzetméter Ár (Ft/m2)"
             };
+
+            for (int i = 0; i < headers.Length; i++)
+            {
+                headers[i] = xlSheet.Cells[1, i + 1];
+            }
         }
 
         
