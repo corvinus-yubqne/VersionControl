@@ -33,7 +33,7 @@ namespace MintaZH1
                 xlWB = xlApp.Workbooks.Add(Missing.Value);
                 xlSheet = xlWB.ActiveSheet;
 
-                
+
 
                 xlApp.Visible = true;
                 xlApp.UserControl = true;
@@ -47,6 +47,14 @@ namespace MintaZH1
                 xlWB = null;
                 xlApp = null;
             }
+        }
+
+        private void FillUp()
+        {
+            var years = (from x in results
+                         orderby x.Year
+                         select x.Year).Distinct();
+            comboBox1.DataSource = years.ToList();
         }
 
         private void LoadData (string fileName)
