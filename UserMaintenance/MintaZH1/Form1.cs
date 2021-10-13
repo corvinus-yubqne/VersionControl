@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Reflection;
+using System.IO;
 
 namespace MintaZH1
 {
@@ -32,7 +33,7 @@ namespace MintaZH1
                 xlWB = xlApp.Workbooks.Add(Missing.Value);
                 xlSheet = xlWB.ActiveSheet;
 
-
+                
 
                 xlApp.Visible = true;
                 xlApp.UserControl = true;
@@ -48,9 +49,29 @@ namespace MintaZH1
             }
         }
 
-        private void LoadData (string filename)
+        private void LoadData (string fileName)
         {
+            using (var sr = new StreamReader(fileName, Encoding.Default))
+            {
+                sr.ReadLine();
+                while (!sr.EndOfStream)
+                {
+                    var line = sr.ReadLine().Split(',');
+                    var or = new OlympicResult()
+                    {
+                        Year = int.Parse(line[0]),
+                        Country = line[3],
+                        Medals = new int[]
+                        {
+                            int.Parse(line[5]),
+                            int.Parse(line[6]),
+                            int.Parse(line[7])
+                        }
+                    };
 
+                    results.Add(or);
+                }
+            }
         }
     }
 }
