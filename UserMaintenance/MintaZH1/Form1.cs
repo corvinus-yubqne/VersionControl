@@ -118,7 +118,7 @@ namespace MintaZH1
 
         private void CreateExcel()
         {
-            string[] headers = new string[]
+            var headers = new string[]
             {
                 "Helyezés",
                 "Ország",
@@ -126,6 +126,27 @@ namespace MintaZH1
                 "Ezüst",
                 "Bronz"
             };
+
+            for (int i = 0; i < headers.Length; i++)
+            {
+                xlSheet.Cells[1, i + 1] = headers[i];
+            }
+
+            var filteredResults = from r in results
+                                  where r.Year == (int)comboBox1.SelectedItem
+                                  orderby r.Position
+                                  select r;
+
+            var counter = 2;
+            foreach (var fr in filteredResults)
+            {
+                xlSheet.Cells[counter, 1] = fr.Position;
+                xlSheet.Cells[counter, 2] = fr.Country;
+                xlSheet.Cells[counter, 3] = fr.Medals[0];
+                xlSheet.Cells[counter, 4] = fr.Medals[1];
+                xlSheet.Cells[counter, 5] = fr.Medals[2];
+                counter++;
+            }
         }
     }
 }
