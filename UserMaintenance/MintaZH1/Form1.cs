@@ -23,30 +23,40 @@ namespace MintaZH1
         {
             InitializeComponent();
             LoadData("Summer_olympic_Medals.csv");
+            FillUp();
+            LineOfResults();
         }
 
-        private void ExcelExport()
+        private void LineOfResults()
         {
-            try
+            foreach (var r in results)
             {
-                xlApp = new Excel.Application();
-                xlWB = xlApp.Workbooks.Add(Missing.Value);
-                xlSheet = xlWB.ActiveSheet;
-
-
-
-                xlApp.Visible = true;
-                xlApp.UserControl = true;
+                r.Position = Position(r);
             }
-            catch (Exception ex)
+        }
+
+        private int Position(OlympicResult oR)
+        {
+            var betterCountry = 0;
+            var filteredCountry = from x in results
+                                  where x.Year == oR.Year && x.Country != oR.Country
+                                  select x;
+            foreach (var fc in filteredCountry)
             {
-                MessageBox.Show(ex.Message);
-
-                xlWB.Close(false, Type.Missing, Type.Missing);
-                xlApp.Quit();
-                xlWB = null;
-                xlApp = null;
+                if (fc.Medals[0] > oR.Medals[0])
+                {
+                    betterCountry++;
+                }
+                else if (fc.Medals[0] == oR.Medals[0] && fc.Medals[1] > oR.Medals[1])
+                {
+                    betterCountry++;
+                }
+                else if (fc.Medals[0] == oR.Medals[0] && fc.Medals[1] == oR.Medals[1] && fc.Medals[2] > oR.Medals[2])
+                {
+                    betterCountry++;
+                }
             }
+            return betterCountry + 1;
         }
 
         private void FillUp()
@@ -80,6 +90,42 @@ namespace MintaZH1
                     results.Add(or);
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                xlApp = new Excel.Application();
+                xlWB = xlApp.Workbooks.Add(Missing.Value);
+                xlSheet = xlWB.ActiveSheet;
+
+                CreateExcel();
+
+                xlApp.Visible = true;
+                xlApp.UserControl = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+                xlWB.Close(false, Type.Missing, Type.Missing);
+                xlApp.Quit();
+                xlWB = null;
+                xlApp = null;
+            }
+        }
+
+        private void CreateExcel()
+        {
+            string[] headers = new string[]
+            {
+                "Helyezés",
+                "Ország",
+                "Arany",
+                "Ezüst",
+                "Bronz"
+            };
         }
     }
 }
