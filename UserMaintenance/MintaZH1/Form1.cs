@@ -22,7 +22,7 @@ namespace MintaZH1
         public Form1()
         {
             InitializeComponent();
-            LoadData();
+            LoadData("Summer_olympic_Medals.csv");
         }
 
         private void ExcelExport()
