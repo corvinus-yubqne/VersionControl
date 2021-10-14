@@ -17,11 +17,39 @@ namespace MintaZH1
     public partial class Form1 : Form
     {
         List<OlympicResult> results = new List<OlympicResult>();
+        Excel.Application xlApp;
+        Excel.Workbook xlWB;
+        Excel.Worksheet xlSheet;
         public Form1()
         {
             InitializeComponent();
             FillInData("Summer_olympic_Medals.csv");
             PickYear();
+            CalculateOrder();
+        }
+
+        private void ExcelExport()
+        {
+            try
+            {
+                xlApp = new Excel.Application();
+                xlWB = xlApp.Workbooks.Add(Missing.Value);
+                xlSheet = xlWB.ActiveSheet;
+
+                CreateExcel();
+
+                xlApp.Visible = true;
+                xlApp.UserControl = true;
+            }
+            catch (Exception ex)
+            {
+                string errMsg = string.Format("Error: {0}\nLine: {1}", ex.Message, ex.Source);
+                MessageBox.Show(errMsg);
+                xlWB.Close(false, Type.Missing, Type.Missing);
+                xlApp.Quit();
+                xlWB = null;
+                xlApp = null;
+            }
         }
 
         public void FillInData(string FileName)
@@ -87,6 +115,44 @@ namespace MintaZH1
             {
                 r.Position = CalculatePosition(r);
             }
+        }
+
+        private void CreateExcel()
+        {
+            string[] headers = new string[]
+            {
+                "Helyezés",
+                "Ország",
+                "Arany",
+                "Ezüst",
+                "Bronz"
+            };
+            for (int i = 0; i < headers.Length; i++)
+            {
+                xlSheet.Cells[1, i + 1] = headers[i];
+            }
+
+            var filteredList = from x in results
+                               where x.Year == (int)comboBox1.SelectedItem
+                               orderby x.Position
+                               select x;
+
+            var counter = 2;
+            foreach (var f in filteredList)
+            {
+                xlSheet.Cells[counter, 1] = f.Year;
+                xlSheet.Cells[counter, 2] = f.Country;
+                xlSheet.Cells[counter, 3] = f.Medals[0];
+                xlSheet.Cells[counter, 4] = f.Medals[1];
+                xlSheet.Cells[counter, 5] = f.Medals[2];
+
+                counter++;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ExcelExport();
         }
     }
 }
