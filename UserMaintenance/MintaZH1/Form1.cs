@@ -56,5 +56,37 @@ namespace MintaZH1
 
             comboBox1.DataSource = filter;
         }
+
+        private int CalculatePosition(OlympicResult olympic)
+        {
+            var betterCountry = 0;
+            var filteredCountry = from x in results
+                                  where olympic.Year == x.Year && olympic.Country != x.Country
+                                  select x;
+            foreach (var r in results)
+            {
+                if (r.Medals[0] > olympic.Medals[0])
+                {
+                    betterCountry++;
+                }
+                else if (r.Medals[0] == olympic.Medals[0] && r.Medals[1] > olympic.Medals[1])
+                {
+                    betterCountry++;
+                }
+                else if (r.Medals[0] == olympic.Medals[0] && r.Medals[1] == olympic.Medals[1] && r.Medals[2] > olympic.Medals[2])
+                {
+                    betterCountry++;
+                }
+            }
+            return betterCountry + 1;
+        }
+
+        private void CalculateOrder()
+        {
+            foreach (var r in results)
+            {
+                r.Position = CalculatePosition(r);
+            }
+        }
     }
 }
