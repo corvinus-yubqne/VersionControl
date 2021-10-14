@@ -21,6 +21,7 @@ namespace MintaZH1
         {
             InitializeComponent();
             FillInData("Summer_olympic_Medals.csv");
+            PickYear();
         }
 
         public void FillInData(string FileName)
@@ -42,8 +43,18 @@ namespace MintaZH1
                             int.Parse(line[7]),
                         }
                     };
+                    results.Add(or);
                 }
             }
+        }
+
+        public void PickYear()
+        {
+            var filter = (from x in results
+                         orderby x.Year
+                         select x.Year).Distinct().ToList();
+
+            comboBox1.DataSource = filter;
         }
     }
 }
