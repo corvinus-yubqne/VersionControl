@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "excel_export", "excel_export\excel_export.csproj", "{366A39AC-2941-49D0-8563-6BD03FDDB9B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaR_calculator", "VaR_calculator\VaR_calculator.csproj", "{4D4D5A88-B90B-4AD2-8F25-55752E2636C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{366A39AC-2941-49D0-8563-6BD03FDDB9B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{366A39AC-2941-49D0-8563-6BD03FDDB9B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{366A39AC-2941-49D0-8563-6BD03FDDB9B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D4D5A88-B90B-4AD2-8F25-55752E2636C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D4D5A88-B90B-4AD2-8F25-55752E2636C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D4D5A88-B90B-4AD2-8F25-55752E2636C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D4D5A88-B90B-4AD2-8F25-55752E2636C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
