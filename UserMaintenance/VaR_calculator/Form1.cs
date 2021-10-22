@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VaR_calculator.Entities;
 
 namespace VaR_calculator
 {
@@ -14,11 +15,31 @@ namespace VaR_calculator
     {
         PortfolioEntities context = new PortfolioEntities();
         List<Tick> Ticks;
+
+        List<PortfolioItem> Portfolio = new List<PortfolioItem>();
         public Form1()
         {
             InitializeComponent();
             Ticks = context.Ticks.ToList();
             dataGridView1.DataSource = Ticks;
+
+            CreatePortfolio();
+        }
+
+        private void CreatePortfolio()
+        {
+            /*
+            PortfolioItem p = new PortfolioItem();
+            p.Index = "OTP";
+            p.Value = 10;
+            Portfolio.Add(p);
+            */
+
+            Portfolio.Add(new PortfolioItem() { Index = "OTP", Volume = 10 });
+            Portfolio.Add(new PortfolioItem() { Index = "ZWACK", Volume = 10 });
+            Portfolio.Add(new PortfolioItem() { Index = "ELMU", Volume = 10 });
+
+            dataGridView2.DataSource = Portfolio;
         }
     }
 }

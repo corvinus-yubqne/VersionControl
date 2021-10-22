@@ -8,5 +8,7 @@ namespace VaR_calculator.Entities
 {
     class PortfolioItem
     {
+        public string Index { get; set; }
+        public decimal Volume { get; set; }
     }
 }
