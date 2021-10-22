@@ -17,7 +17,8 @@ namespace VaR_calculator
         public Form1()
         {
             InitializeComponent();
-            
+            Ticks = context.Ticks.ToList();
+            dataGridView1.DataSource = Ticks;
         }
     }
 }
