@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "excel_export", "excel_expor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaR_calculator", "VaR_calculator\VaR_calculator.csproj", "{4D4D5A88-B90B-4AD2-8F25-55752E2636C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webszolgaltatas", "webszolgaltatas\webszolgaltatas.csproj", "{C0C0060C-D0D1-4D75-88E4-9A2A87DAB025}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4D4D5A88-B90B-4AD2-8F25-55752E2636C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D4D5A88-B90B-4AD2-8F25-55752E2636C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D4D5A88-B90B-4AD2-8F25-55752E2636C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0C0060C-D0D1-4D75-88E4-9A2A87DAB025}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0C0060C-D0D1-4D75-88E4-9A2A87DAB025}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0C0060C-D0D1-4D75-88E4-9A2A87DAB025}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0C0060C-D0D1-4D75-88E4-9A2A87DAB025}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
