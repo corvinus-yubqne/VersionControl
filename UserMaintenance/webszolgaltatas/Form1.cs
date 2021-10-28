@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using webszolgaltatas.MnbServiceReference;
 
 namespace webszolgaltatas
 {
@@ -20,7 +21,14 @@ namespace webszolgaltatas
 
         private void WebServiceCall()
         {
+            var mnbService = new MNBArfolyamServiceSoapClient();
 
+            var request = new GetExchangeRatesRequestBody()
+            {
+                currencyNames = "EUR",
+                startDate = "2020-01-01",
+                endDate = "2020-06-30"
+            };
         }
     }
 }
