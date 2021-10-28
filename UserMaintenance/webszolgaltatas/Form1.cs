@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using webszolgaltatas.MnbServiceReference;
 using webszolgaltatas.Entities;
 using System.Xml;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace webszolgaltatas
 {
@@ -20,9 +21,10 @@ namespace webszolgaltatas
         {
             InitializeComponent();
             WebServiceCall();
+            VisualizeData();
 
             dataGridView1.DataSource = Rates;
-
+            chartRateData.DataSource = Rates;
             
         }
 
@@ -58,6 +60,23 @@ namespace webszolgaltatas
                 var value = decimal.Parse(childElement.InnerText);
                 if (unit != 0) rate.Value = value / unit;
             }
+        }
+
+        private void VisualizeData()
+        {
+            var series = chartRateData.Series[0];
+            series.ChartType = SeriesChartType.Line;
+            series.XValueMember = "Date";
+            series.YValueMembers = "Value";
+            series.BorderWidth = 2;
+
+            var legend = chartRateData.Legends[0];
+            legend.Enabled = false;
+
+            var chartArea = chartRateData.ChartAreas[0];
+            chartArea.AxisX.MajorGrid.Enabled = false;
+            chartArea.AxisY.MajorGrid.Enabled = false;
+            chartArea.AxisX.IsStartedFromZero = false;
         }
     }
 }
