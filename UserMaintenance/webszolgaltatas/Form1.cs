@@ -15,6 +15,12 @@ namespace webszolgaltatas
         public Form1()
         {
             InitializeComponent();
+            WebServiceCall();
+        }
+
+        private void WebServiceCall()
+        {
+
         }
     }
 }
