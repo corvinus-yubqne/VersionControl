@@ -8,15 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using webszolgaltatas.MnbServiceReference;
+using webszolgaltatas.Entities;
 
 namespace webszolgaltatas
 {
     public partial class Form1 : Form
     {
+        BindingList<RateData> Rates = new BindingList<RateData>();
         public Form1()
         {
             InitializeComponent();
             WebServiceCall();
+
+            dataGridView1.DataSource = Rates;
         }
 
         private void WebServiceCall()
