@@ -29,6 +29,10 @@ namespace webszolgaltatas
                 startDate = "2020-01-01",
                 endDate = "2020-06-30"
             };
+
+            var response = mnbService.GetExchangeRates(request);
+
+            var result = response.GetExchangeRatesResult;
         }
     }
 }
