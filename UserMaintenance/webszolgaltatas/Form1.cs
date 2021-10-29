@@ -22,7 +22,16 @@ namespace webszolgaltatas
         {
             InitializeComponent();
 
-            GetCurrencies();
+            MNBArfolyamServiceSoapClient mnbService = new MNBArfolyamServiceSoapClient();
+            GetCurrenciesRequestBody request = new GetCurrenciesRequestBody();
+
+            var response = mnbService.GetCurrencies(request);
+            var result = response.GetCurrenciesResult;
+            XmlDocument vxml = new XmlDocument();
+            foreach (XmlElement item in vxml.DocumentElement.FirstChild.ChildNodes)
+            {
+                Currencies.Add(item.InnerText);
+            }
             
             RefreshData();
         }
@@ -88,27 +97,10 @@ namespace webszolgaltatas
             Rates.Clear();
 
             string result = WebServiceCall();
-            dataGridView1.DataSource = Rates;
-
             XmlProcess(result);
-
             VisualizeData();
-        }
 
-        private void GetCurrencies()
-        {
-            MNBArfolyamServiceSoapClient mnbService = new MNBArfolyamServiceSoapClient();
-            GetCurrenciesRequestBody request = new GetCurrenciesRequestBody();
-            var response = mnbService.GetCurrencies(request);
-            var result = response.GetCurrenciesResult;
-            XmlDocument xml = new XmlDocument();
-            xml.LoadXml(result);
-
-            foreach (XmlElement xmlElement in xml.DocumentElement.ChildNodes[0])
-            {
-                string currency = xmlElement.InnerText;
-                Currencies.Add(currency);
-            }
+            dataGridView1.DataSource = Rates;
             comboBox1.DataSource = Currencies;
         }
 
