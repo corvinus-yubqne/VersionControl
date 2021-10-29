@@ -29,14 +29,17 @@ namespace webszolgaltatas
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.chartRateData = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartRateData)).BeginInit();
             this.SuspendLayout();
@@ -44,7 +47,7 @@ namespace webszolgaltatas
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(13, 49);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 130);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
@@ -53,51 +56,82 @@ namespace webszolgaltatas
             // 
             // chartRateData
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartRateData.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartRateData.Legends.Add(legend1);
-            this.chartRateData.Location = new System.Drawing.Point(503, 49);
+            chartArea3.Name = "ChartArea1";
+            this.chartRateData.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chartRateData.Legends.Add(legend3);
+            this.chartRateData.Location = new System.Drawing.Point(494, 130);
             this.chartRateData.Name = "chartRateData";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartRateData.Series.Add(series1);
-            this.chartRateData.Size = new System.Drawing.Size(627, 389);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartRateData.Series.Add(series3);
+            this.chartRateData.Size = new System.Drawing.Size(814, 389);
             this.chartRateData.TabIndex = 1;
             this.chartRateData.Text = "chart1";
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(13, 13);
+            this.dateTimePicker1.Location = new System.Drawing.Point(153, 64);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker1.Size = new System.Drawing.Size(217, 22);
             this.dateTimePicker1.TabIndex = 2;
+            this.dateTimePicker1.Value = new System.DateTime(2020, 6, 30, 16, 15, 0, 0);
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(219, 12);
+            this.dateTimePicker2.Location = new System.Drawing.Point(153, 102);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker2.Size = new System.Drawing.Size(217, 22);
             this.dateTimePicker2.TabIndex = 3;
             this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(425, 10);
+            this.comboBox1.Location = new System.Drawing.Point(153, 25);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.Size = new System.Drawing.Size(217, 24);
             this.comboBox1.TabIndex = 4;
             this.comboBox1.Text = "EUR";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(25, 28);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 17);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Valuta:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(25, 69);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 17);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Kezdő dátum:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(25, 107);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(95, 17);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Végző dátum:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1142, 671);
+            this.ClientSize = new System.Drawing.Size(1320, 531);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker1);
@@ -109,6 +143,7 @@ namespace webszolgaltatas
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartRateData)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -119,6 +154,9 @@ namespace webszolgaltatas
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
 
