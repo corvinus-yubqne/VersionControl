@@ -64,6 +64,9 @@ namespace webszolgaltatas
 
         private void VisualizeData()
         {
+
+            chartRateData.DataSource = Rates;
+
             var series = chartRateData.Series[0];
             series.ChartType = SeriesChartType.Line;
             series.XValueMember = "Date";
@@ -87,14 +90,23 @@ namespace webszolgaltatas
             VisualizeData();
 
             dataGridView1.DataSource = Rates;
-            chartRateData.DataSource = Rates;
         }
 
         private void GetCurrencies()
         {
             MNBArfolyamServiceSoapClient mnbService = new MNBArfolyamServiceSoapClient();
             GetCurrenciesRequestBody request = new GetCurrenciesRequestBody();
+            var response = mnbService.GetCurrencies(request);
+            var result = response.GetCurrenciesResult;
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(result);
 
+            foreach (XmlElement xmlElement in xml.DocumentElement.ChildNodes[0])
+            {
+                string currency = xmlElement.InnerText;
+                Currencies.Add(currency);
+            }
+            comboBox1.DataSource = Currencies;
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
