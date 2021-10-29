@@ -24,25 +24,26 @@ namespace webszolgaltatas
 
             GetCurrencies();
             
-
             RefreshData();
         }
 
-        public void WebServiceCall()
+        private string WebServiceCall()
         {
             var mnbService = new MNBArfolyamServiceSoapClient();
 
             var request = new GetExchangeRatesRequestBody()
             {
-                currencyNames = "USD",
+                currencyNames = comboBox1.SelectedItem.ToString(),
                 startDate = dateTimePicker1.Value.ToString(),
                 endDate = dateTimePicker2.Value.ToString()
             };
 
             var response = mnbService.GetExchangeRates(request);
-
             var result = response.GetExchangeRatesResult;
+        }
 
+        private void XmlProcess(string result)
+        {
             var xml = new XmlDocument();
             xml.LoadXml(result);
 
@@ -59,7 +60,7 @@ namespace webszolgaltatas
                 var unit = decimal.Parse(childElement.GetAttribute("unit"));
                 var value = decimal.Parse(childElement.InnerText);
                 if (unit != 0) rate.Value = value / unit;
-            }
+            }            
         }
 
         private void VisualizeData()
@@ -86,10 +87,12 @@ namespace webszolgaltatas
         {
             Rates.Clear();
 
-            WebServiceCall();
-            VisualizeData();
-
+            string result = WebServiceCall();
             dataGridView1.DataSource = Rates;
+
+            XmlProcess(result);
+
+            VisualizeData();
         }
 
         private void GetCurrencies()
