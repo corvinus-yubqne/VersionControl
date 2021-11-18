@@ -36,14 +36,14 @@ namespace gyartosor
 
         private void DisplayNext()
         {
-            if (_nextToy != null) 
-            { 
-                Controls.Remove(_nextToy); 
+            if (_nextToy != null)
+            {
+                mainPanel.Controls.Remove(_nextToy);
             }
             _nextToy = Factory.CreateNew();
-            _nextToy.Left = label1.Left;
-            _nextToy.Top = label1.Top + label1.Height + 10;
-            Controls.Add(_nextToy);
+            _nextToy.Left = label1.Left + label1.Width + 10;
+            _nextToy.Top = label1.Top + (label1.Height/2) - 25;
+            mainPanel.Controls.Add(_nextToy);
             
         }
 
