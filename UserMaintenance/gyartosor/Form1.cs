@@ -33,12 +33,21 @@ namespace gyartosor
             var ball = Factory.CreateNew();
             _balls.Add(ball);
             mainPanel.Controls.Add(ball);
-            ball.Left = -Width;
+            ball.Left = -ball.Width;
         }
 
         private void conveyorTimer_Tick(object sender, EventArgs e)
         {
+            var mostToTheRight = 0;
 
+            foreach (var b in _balls)
+            {
+                b.MoveBall();
+                if (b.Left > mostToTheRight)
+                {
+                    mostToTheRight = b.Left;
+                }
+            }
         }
     }
 }
