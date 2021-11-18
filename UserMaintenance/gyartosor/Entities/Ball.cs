@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,12 @@ namespace gyartosor.Entities
 
         private void Ball_Paint(object sender, PaintEventArgs e)
         {
-            throw new NotImplementedException();
+            DrawImage(e.Graphics);
+        }
+
+        public void DrawImage(Graphics g)
+        {
+
         }
     }
 }
