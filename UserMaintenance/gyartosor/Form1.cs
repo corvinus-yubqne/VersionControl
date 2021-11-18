@@ -43,7 +43,7 @@ namespace gyartosor
 
             foreach (var b in _balls)
             {
-                b.MoveBall();
+                b.MoveToy();
                 if (b.Left > mostToTheRight)
                 {
                     mostToTheRight = b.Left;
