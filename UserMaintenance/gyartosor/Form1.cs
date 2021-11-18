@@ -1,4 +1,5 @@
-﻿using gyartosor.Entities;
+﻿using gyartosor.Abstracts;
+using gyartosor.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,10 +14,10 @@ namespace gyartosor
 {
     public partial class Form1 : Form
     {
-        private List<Ball> _balls = new List<Ball>();
+        private List<Toy> _toys = new List<Toy>();
 
-        private BallFactory _factory;
-        public BallFactory Factory
+        private IToyFactory _factory;
+        public IToyFactory Factory
         {
             get { return _factory; }
             set { _factory = value; }
@@ -25,15 +26,15 @@ namespace gyartosor
         public Form1()
         {
             InitializeComponent();
-            Factory = new BallFactory();
+            Factory = new CarFactory();
         }
 
         private void createTimer_Tick(object sender, EventArgs e)
         {
-            var ball = Factory.CreateNew();
-            _balls.Add(ball);
-            ball.Left = -ball.Width;
-            mainPanel.Controls.Add(ball);
+            var toy = Factory.CreateNew();
+            _toys.Add(toy);
+            toy.Left = -toy.Width;
+            mainPanel.Controls.Add(toy);
             
         }
 
@@ -41,19 +42,19 @@ namespace gyartosor
         {
             var mostToTheRight = 0;
 
-            foreach (var b in _balls)
+            foreach (var t in _toys)
             {
-                b.MoveToy();
-                if (b.Left > mostToTheRight)
+                t.MoveToy();
+                if (t.Left > mostToTheRight)
                 {
-                    mostToTheRight = b.Left;
+                    mostToTheRight = t.Left;
                 }
             }
 
             if (mostToTheRight > 1000)
             {
-                var delete = _balls[0];
-                _balls.Remove(delete);
+                var delete = _toys[0];
+                _toys.Remove(delete);
                 mainPanel.Controls.Remove(delete);
             }
         }
