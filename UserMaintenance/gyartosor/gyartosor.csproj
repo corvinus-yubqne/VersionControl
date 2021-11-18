@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstracts\Toy.cs" />
     <Compile Include="Entities\Ball.cs">
       <SubType>Component</SubType>
     </Compile>
