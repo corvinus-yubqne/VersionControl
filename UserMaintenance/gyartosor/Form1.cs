@@ -34,23 +34,11 @@ namespace gyartosor
             InitializeComponent();
         }
 
-        private void DisplayNext()
-        {
-            if (_nextToy != null)
-            {
-                mainPanel.Controls.Remove(_nextToy);
-            }
-            _nextToy = Factory.CreateNew();
-            _nextToy.Left = label1.Left + label1.Width + 10;
-            _nextToy.Top = label1.Top + (label1.Height/2) - 25;
-            mainPanel.Controls.Add(_nextToy);
-            
-        }
-
         private void createTimer_Tick(object sender, EventArgs e)
         {
             var toy = Factory.CreateNew();
             _toys.Add(toy);
+            toy.Top = 200;
             toy.Left = -toy.Width;
             mainPanel.Controls.Add(toy);
             
@@ -103,6 +91,19 @@ namespace gyartosor
             {
                 button.BackColor = colorPicker.Color;
             }
+        }
+
+        private void DisplayNext()
+        {
+            if (_nextToy != null)
+            {
+                mainPanel.Controls.Remove(_nextToy);
+            }
+            _nextToy = Factory.CreateNew();
+            _nextToy.Left = label1.Left + label1.Width + 10;
+            _nextToy.Top = label1.Top + (label1.Height / 2) - 25;
+            mainPanel.Controls.Add(_nextToy);
+
         }
     }
 }
