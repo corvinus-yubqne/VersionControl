@@ -105,5 +105,45 @@ namespace gyartosor
             mainPanel.Controls.Add(_nextToy);
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Factory = new PresentFactory
+            {
+                boxColor = button5.BackColor,
+                ribbonColor = button6.BackColor
+            };
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var colorPicker = new ColorDialog();
+
+            colorPicker.Color = button.BackColor;
+            if (colorPicker.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            } else
+            {
+                button.BackColor = colorPicker.Color;
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var colorPicker = new ColorDialog();
+
+            colorPicker.Color = button.BackColor;
+            if (colorPicker.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            else
+            {
+                button.BackColor = colorPicker.Color;
+            }
+        }
     }
 }
