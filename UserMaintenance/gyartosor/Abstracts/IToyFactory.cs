@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace gyartosor.Abstracts
 {
-    interface IToyFactory
+    public interface IToyFactory
     {
+        Toy CreateNew();
     }
 }
