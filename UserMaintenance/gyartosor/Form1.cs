@@ -16,17 +16,35 @@ namespace gyartosor
     {
         private List<Toy> _toys = new List<Toy>();
 
+        private Toy _nextToy;
+
         private IToyFactory _factory;
         public IToyFactory Factory
         {
             get { return _factory; }
-            set { _factory = value; }
+            set 
+            {
+                _factory = value;
+                DisplayNext();
+            }
 
         }
         public Form1()
         {
             InitializeComponent();
-            Factory = new CarFactory();
+        }
+
+        private void DisplayNext()
+        {
+            if (_nextToy != null) 
+            { 
+                Controls.Remove(_nextToy); 
+            }
+            _nextToy = Factory.CreateNew();
+            _nextToy.Left = label1.Left;
+            _nextToy.Top = label1.Top + label1.Height + 10;
+            Controls.Add(_nextToy);
+            
         }
 
         private void createTimer_Tick(object sender, EventArgs e)
@@ -61,12 +79,12 @@ namespace gyartosor
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            Factory = new CarFactory();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            Factory = new BallFactory();
         }
     }
 }
