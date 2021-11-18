@@ -37,6 +37,7 @@ namespace gyartosor
             // 
             // mainPanel
             // 
+            this.mainPanel.BackColor = System.Drawing.Color.Transparent;
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(801, 453);
@@ -44,11 +45,13 @@ namespace gyartosor
             // 
             // createTimer
             // 
+            this.createTimer.Enabled = true;
             this.createTimer.Interval = 3000;
             this.createTimer.Tick += new System.EventHandler(this.createTimer_Tick);
             // 
             // conveyorTimer
             // 
+            this.conveyorTimer.Enabled = true;
             this.conveyorTimer.Interval = 10;
             this.conveyorTimer.Tick += new System.EventHandler(this.conveyorTimer_Tick);
             // 

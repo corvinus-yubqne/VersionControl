@@ -13,7 +13,7 @@ namespace gyartosor
 {
     public partial class Form1 : Form
     {
-        List<Ball> _balls = new List<Ball>();
+        private List<Ball> _balls = new List<Ball>();
 
         private BallFactory _factory;
         public BallFactory Factory
@@ -32,8 +32,9 @@ namespace gyartosor
         {
             var ball = Factory.CreateNew();
             _balls.Add(ball);
-            mainPanel.Controls.Add(ball);
             ball.Left = -ball.Width;
+            mainPanel.Controls.Add(ball);
+            
         }
 
         private void conveyorTimer_Tick(object sender, EventArgs e)
@@ -47,6 +48,13 @@ namespace gyartosor
                 {
                     mostToTheRight = b.Left;
                 }
+            }
+
+            if (mostToTheRight > 1000)
+            {
+                var delete = _balls[0];
+                _balls.Remove(delete);
+                mainPanel.Controls.Remove(delete);
             }
         }
     }
