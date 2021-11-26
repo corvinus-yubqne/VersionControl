@@ -17,9 +17,9 @@ namespace UnitTestExample.Test
         [
             Test,
             TestCase("abcd1234", false),
-            TestCase("irf@uni-corvinus", false),
-            TestCase("irf.uni-corvinus.hu", false),
-            TestCase("irf@uni-corvinus.hu", true)
+            TestCase("patrik.zakar@uni-corvinus", false),
+            TestCase("patrik.zakar.uni-corvinus.hu", false),
+            TestCase("patrik.zakar@uni-corvinus.hu", true)
         ]
         public void TestValidateEmail(string email, bool expectedResult)
         {
@@ -52,8 +52,8 @@ namespace UnitTestExample.Test
 
         [
             Test,
-            TestCase("irf@uni-corvinus.hu","Abcd1234"),
-            TestCase("irf@uni-corvinus.hu","Abcd123456")
+            TestCase("patrik.zakar@uni-corvinus.hu","Abcd1234"),
+            TestCase("patrik.zakar@uni-corvinus.hu","Abcd123456")
         ]
         public void TestRegisterHappyPath(string email, string password)
         {
@@ -75,12 +75,12 @@ namespace UnitTestExample.Test
 
         [
             Test,
-            TestCase("irf@uni-corvinus", "Abcd1234"),
-            TestCase("irf.uni-corvinus.hu", "Abcd1234"),
-            TestCase("irf@uni-corvinus.hu", "abcd1234"),
-            TestCase("irf@uni-corvinus.hu", "ABCD1234"),
-            TestCase("irf@uni-corvinus.hu", "ABCDabcd"),
-            TestCase("irf@uni-corvinus.hu", "Abcd123")
+            TestCase("patrik.zakar@stud.uni-corvinus", "Abcd1234"),
+            TestCase("patrik.zakar.stud.uni-corvinus.hu", "Abcd1234"),
+            TestCase("patrik.zakar@stud.uni-corvinus.hu", "abcd1234"),
+            TestCase("patrik.zakar@stud.uni-corvinus.hu", "ABCD1234"),
+            TestCase("patrik.zakar@stud.uni-corvinus.hu", "ABCDabcd"),
+            TestCase("patrik.zakar@stud.uni-corvinus.hu", "Abcd123")
         ]
         public void TestRegisterValidateException(string email, string password)
         {
@@ -101,7 +101,7 @@ namespace UnitTestExample.Test
 
         [
             Test,
-            TestCase("irf@uni-corvinus.hu", "Abcd1234")
+            TestCase("patrik.zakar@stud.uni-corvinus.hu", "Abcd1234")
         ]
         public void TestRegisterApplicationException(string newEmail, string newPassword)
         {
