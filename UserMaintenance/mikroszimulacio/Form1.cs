@@ -21,6 +21,10 @@ namespace mikroszimulacio
             List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
 
             InitializeComponent();
+
+            Population = GetPopulation(@"C:\Windows\Temp\nép.csv");
+            BirthProbabilities = GetBirthProbabilities(@"C:\Windows\Temp\születés.csv");
+            DeathProbabilities = GetDeathProbabilities(@"C:\Windows\Temp\halál.csv");
         }
 
         public List<Person> GetPopulation(string csvpath)
