@@ -19,6 +19,10 @@ namespace mikroszimulacio
         List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
 
         Random rnd = new Random(1234);
+
+        List<int> males = new List<int>();
+        List<int> females = new List<int>();
+
         public Form1()
         {
             InitializeComponent();
@@ -31,7 +35,7 @@ namespace mikroszimulacio
 
         private void Simulation()
         {
-            for (int year = 2005; year <= 2024; year++)
+            for (int year = 2005; year <= numericUpDown1.Value; year++)
             {
                 for (int i = 0; i < Population.Count; i++)
                 {
@@ -46,9 +50,13 @@ namespace mikroszimulacio
                                     where x.Gender == Gender.Female && x.IsAlive
                                     select x).Count();
 
-                Console.WriteLine(
-                    string.Format("Év: {0} Fiúk: {1} Lányok: {2}", year, NbrOfMales, NbrOfFemales));
+                males.Add(NbrOfMales);
+                females.Add(NbrOfFemales);
 
+                richTextBox1.Text +=
+                    string.Format("\nSzimulációs év: {0}\n\tFérfiak: {1}\n\tNők: {2}\n", year, NbrOfMales, NbrOfFemales);
+
+                //DisplayResults();
             }
         }
 
@@ -150,8 +158,30 @@ namespace mikroszimulacio
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            richTextBox1
+            richTextBox1.Clear();
+            males.Clear();
+            females.Clear();
             Simulation();
         }
+
+        private void buttonBrowse_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            if (ofd.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            textBox1.Text = @"C:\Windows\Temp\nép.csv";
+        }
+
+        /*private void DisplayResults()
+        {
+            foreach (var year in Population)
+            {
+                richTextBox1.Text = string.Format("Szimuláció éve: {0}\n\tFérfiak: {1}\n\tNők: {2}", year, males, females);
+            }
+        }*/
     }
 }
