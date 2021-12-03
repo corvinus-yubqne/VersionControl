@@ -14,19 +14,19 @@ namespace mikroszimulacio
 {
     public partial class Form1 : Form
     {
+        List<Person> Population = new List<Person>();
+        List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
+        List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
+
+        Random rnd = new Random(1234);
         public Form1()
         {
-            List<Person> Population = new List<Person>();
-            List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
-            List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
-
             InitializeComponent();
 
             Population = GetPopulation(@"C:\Windows\Temp\nép.csv");
             BirthProbabilities = GetBirthProbabilities(@"C:\Windows\Temp\születés.csv");
             DeathProbabilities = GetDeathProbabilities(@"C:\Windows\Temp\halál.csv");
 
-            Random rnd = new Random(1234);
         }
 
         public List<Person> GetPopulation(string csvpath)
