@@ -29,6 +29,61 @@ namespace mikroszimulacio
 
         }
 
+        private void Simulation()
+        {
+            for (int year = 2005; year <= 2024; year++)
+            {
+                for (int i = 0; i < Population.Count; i++)
+                {
+                    SimStep(year, Population[i]);
+                }
+
+                int NbrOfMales = (from x in Population
+                                  where x.Gender == Gender.Male && x.IsAlive
+                                  select x).Count();
+
+                int NbrOfFemales = (from x in Population
+                                    where x.Gender == Gender.Female && x.IsAlive
+                                    select x).Count();
+
+                Console.WriteLine(
+                    string.Format("Év: {0} Fiúk: {1} Lányok: {2}", year, NbrOfMales, NbrOfFemales));
+
+            }
+        }
+
+        private void SimStep(int year, Person person)
+        {
+            if (!person.IsAlive) return;
+
+            byte age = (byte)(year - person.BirthYear);
+
+            double deathProbz = (from x in DeathProbabilities
+                              where x.Gender == person.Gender && x.Age == age
+                              select x.Probability).FirstOrDefault();
+
+            if (rnd.NextDouble() <= deathProbz)
+            {
+                person.IsAlive = false;
+            };
+
+            if (person.Gender == Gender.Female && person.IsAlive == true)
+            {
+                double birthProbz = (from x in BirthProbabilities
+                                     where x.Age == age
+                                     select x.Probability).FirstOrDefault();
+
+                if (rnd.NextDouble() <= birthProbz)
+                {
+                    Person infant = new Person();
+                    infant.BirthYear = year;
+                    infant.Gender = (Gender)(rnd.Next(1, 3));
+                    infant.NbrOfChildren = 0;
+                    Population.Add(infant);
+                }
+            }
+        }
+
         public List<Person> GetPopulation(string csvpath)
         {
             List<Person> population = new List<Person>();
@@ -37,7 +92,7 @@ namespace mikroszimulacio
             {
                 while(!sr.EndOfStream)
                 {
-                    var line = sr.ReadLine().Split(',');
+                    var line = sr.ReadLine().Split(';');
                     population.Add(new Person()
                     {
                         BirthYear = int.Parse(line[0]),
@@ -58,7 +113,7 @@ namespace mikroszimulacio
             {
                 while(!sr.EndOfStream)
                 {
-                    var line = sr.ReadLine().Split(',');
+                    var line = sr.ReadLine().Split(';');
                     birthProbabilities.Add(new BirthProbability()
                     {
                         Age = int.Parse(line[0]),
@@ -79,7 +134,7 @@ namespace mikroszimulacio
             {
                 while(!sr.EndOfStream)
                 {
-                    var line = sr.ReadLine().Split(',');
+                    var line = sr.ReadLine().Split(';');
                     deathProbabilities.Add(new DeathProbability()
                     {
                         Gender = (Gender)Enum.Parse(typeof(Gender), line[0]),
@@ -91,6 +146,12 @@ namespace mikroszimulacio
 
             return deathProbabilities;
 
+        }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            richTextBox1
+            Simulation();
         }
     }
 }
