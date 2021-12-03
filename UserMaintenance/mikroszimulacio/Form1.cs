@@ -25,6 +25,8 @@ namespace mikroszimulacio
             Population = GetPopulation(@"C:\Windows\Temp\nép.csv");
             BirthProbabilities = GetBirthProbabilities(@"C:\Windows\Temp\születés.csv");
             DeathProbabilities = GetDeathProbabilities(@"C:\Windows\Temp\halál.csv");
+
+            Random rnd = new Random(1234);
         }
 
         public List<Person> GetPopulation(string csvpath)
