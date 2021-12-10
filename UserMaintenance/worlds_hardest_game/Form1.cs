@@ -21,6 +21,9 @@ namespace worlds_hardest_game
 
             ga = gc.ActivateDisplay();
             this.Controls.Add(ga);
+
+            gc.AddPlayer();
+            gc.Start(true);
         }
     }
 }
