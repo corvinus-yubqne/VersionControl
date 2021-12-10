@@ -16,8 +16,8 @@ namespace worlds_hardest_game
         GameController gc = new GameController();
         GameArea ga;
 
-        int populationSize = 100;
-        int nbrOfSteps = 100;
+        int populationSize = 150;
+        int nbrOfSteps = 50;
         int nbrOfStepsIncrement = 10;
         int generation = 1;
 
