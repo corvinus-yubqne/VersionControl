@@ -27,11 +27,19 @@ namespace worlds_hardest_game
             ga = gc.ActivateDisplay();
             this.Controls.Add(ga);
 
+            gc.GameOver += Gc_GameOver;
+
             for (int i = 0; i < populationSize; i++)
             {
                 gc.AddPlayer(nbrOfSteps);
             }
+
             gc.Start();
+        }
+
+        private void Gc_GameOver(object sender)
+        {
+            
         }
     }
 }
